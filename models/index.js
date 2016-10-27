@@ -27,8 +27,8 @@ function getDatabases()
 *	database_b : { name: "database_a", sequelize: Object, models : []},
 *	etc..
 * }
-*	-the sequelize Object will later be used to generate the conection 
-* 	-models:[], a model represents a table, and is used for querys, (when doing a raw query you can use any model)
+*	-the sequelize Object will later be used to generate the conection, and for raw queries 
+* 	-models:[], a model represents a table, used for queries
 */
 var databases={};
 getDatabases().forEach(function(db_name){		

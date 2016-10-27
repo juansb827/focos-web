@@ -51,6 +51,7 @@ router.get("/companies/:compName/aplications",function(req,res,next){
 
 //devuelve el menu al que un usuario tiene acceso (por ahora devuelve todo)
 router.get("/companies/:compName/users/:uID/menu",function(req,res,next){
+	
 	var seq=global.databases["db_focus"].sequelize;
 	var SYSMENUFOCUS=global.databases["db_focus"].models.SYSMENUFOCUS;
 	var consulta="SELECT * FROM sysmenufocus "+  
@@ -65,10 +66,18 @@ router.get("/companies/:compName/users/:uID/menu",function(req,res,next){
 		var menu={};
 		results.forEach(function(result){
 			var nombreModulo=result.NOM_APLIC;
+			//MENU
 			if(menu[nombreModulo]==null){
 				menu[nombreModulo]=[];				
 			}
-			menu[nombreModulo].push({PROMPT: result.PROMPT, APL_ICO: result.APL_ICO});
+			//AGREGA EL SUBMENU
+			menu[nombreModulo].push({
+				CNUM_APLIC: result.CNUM_APLIC,
+				NUMERAL: result.NUMERAL,
+				PROMPT: result.PROMPT, 
+				APL_ICO: result.APL_ICO,
+
+			});
 		});
 		res.json(menu);
 	});
